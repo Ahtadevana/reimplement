@@ -42,3 +42,8 @@ IntVector &IntVector::operator=(IntVector &other) {
 }
 
 IntVector::~IntVector() { delete[] data_; }
+
+bool IntVector::isAlloc() { return data_ != nullptr; }
+bool IntVector::isEmpty() { return size_ == 0; }
+std::size_t IntVector::size() { return size_; }
+std::size_t IntVector::capacity() { return capacity_; }
