@@ -12,7 +12,9 @@ public:
   ~IntVector();
 
   void reserve(std::size_t amount);
+  void pushBack(int value);
 
+  void dump();
   void log();
 
   [[nodiscard]] bool isAlloc();

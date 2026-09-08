@@ -55,13 +55,56 @@ void IntVector::reserve(std::size_t amount) {
                  "capacity\n";
     return;
   }
-  int *temp = new int[amount];
+  int *temp{new int[amount]};
   for (std::size_t i{}; i < size_; ++i) {
     temp[i] = data_[i];
   }
   delete[] data_;
   data_ = temp;
   capacity_ = amount;
+}
+
+void IntVector::pushBack(int value) {
+  if (!isAlloc()) {
+    constexpr int initSize{1};
+
+    data_ = new int[initSize];
+    data_[0] = value;
+    size_ = initSize;
+    capacity_ = initSize;
+
+    return;
+  }
+  if (size_ + 1 > capacity_) {
+    const std::size_t doubleCap{capacity_ * 2};
+
+    int *temp = new int[doubleCap];
+    for (std::size_t i{}; i < size_; ++i) {
+      temp[i] = data_[i];
+    }
+    delete[] data_;
+    data_ = temp;
+
+    data_[size_] = value;
+    ++size_;
+    capacity_ = doubleCap;
+    return;
+  }
+  data_[size_] = value;
+  ++size_;
+}
+
+void IntVector::dump() {
+  std::cout << "[ ";
+  if (!isAlloc()) {
+    std::cout << "nullptr";
+
+  } else {
+    for (std::size_t i{}; i < size_; ++i) {
+      std::cout << data_[i] << ' ';
+    }
+  }
+  std::cout << "]\n";
 }
 
 void IntVector::log() {
