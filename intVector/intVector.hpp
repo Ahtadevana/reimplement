@@ -11,6 +11,10 @@ public:
 
   ~IntVector();
 
+  void reserve(std::size_t amount);
+
+  void log();
+
   [[nodiscard]] bool isAlloc();
   [[nodiscard]] bool isEmpty();
   [[nodiscard]] std::size_t size();
