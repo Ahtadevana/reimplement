@@ -1,14 +1,15 @@
 #include "intVector.hpp"
+#include <algorithm>
+#include <utility>
 
 int main() {
   IntVector v;
-  v.reserve(16);
+  IntVector z(16);
 
-  v.log();
-  v.pushBack(99);
+  v.reserve(4);
+  v.pushBack(10);
 
-  v.log();
-  v.dump();
+  z.log();
 
   return 0;
 }

@@ -9,18 +9,22 @@ public:
   IntVector(IntVector &other);
   IntVector &operator=(IntVector &other);
 
+  IntVector(IntVector &&other);
+  IntVector &operator=(IntVector &&other);
+
   ~IntVector();
 
   void reserve(std::size_t amount);
   void pushBack(int value);
+  void popBack();
 
-  void dump();
-  void log();
+  void dump() const;
+  void log() const;
 
-  [[nodiscard]] bool isAlloc();
-  [[nodiscard]] bool isEmpty();
-  [[nodiscard]] std::size_t size();
-  [[nodiscard]] std::size_t capacity();
+  [[nodiscard]] bool isAlloc() const;
+  [[nodiscard]] bool isEmpty() const;
+  [[nodiscard]] std::size_t size() const;
+  [[nodiscard]] std::size_t capacity() const;
 
 private:
   int *data_{nullptr};

@@ -21,7 +21,7 @@ IntVector::IntVector(IntVector &other)
     : size_(other.size_), capacity_(other.capacity_) {
   data_ = new int[other.capacity_];
 
-  for (int i{}; i < other.size_; ++i) {
+  for (std::size_t i{}; i < other.size_; ++i) {
     data_[i] = other.data_[i];
   }
 }
@@ -33,7 +33,7 @@ IntVector &IntVector::operator=(IntVector &other) {
   delete[] data_;
   data_ = new int[other.capacity_];
 
-  for (int i{}; i < other.size_; ++i) {
+  for (std::size_t i{}; i < other.size_; ++i) {
     data_[i] = other.data_[i];
   }
   size_ = other.size_;
@@ -94,7 +94,19 @@ void IntVector::pushBack(int value) {
   ++size_;
 }
 
-void IntVector::dump() {
+void IntVector::popBack() {
+  if (!isAlloc()) {
+    std::cout << "void IntVector::popback(): cannot pop unallocated vector\n";
+    return;
+  }
+  if (isEmpty()) {
+    std::cout << "void IntVector::popback(): vector is empty\n";
+    return;
+  }
+  --size_;
+}
+
+void IntVector::dump() const {
   std::cout << "[ ";
   if (!isAlloc()) {
     std::cout << "nullptr";
@@ -107,13 +119,13 @@ void IntVector::dump() {
   std::cout << "]\n";
 }
 
-void IntVector::log() {
+void IntVector::log() const {
   std::cout << "Base: " << data_ << '\n'
             << "Size: " << size_ << '\n'
             << "Capacity: " << capacity_ << '\n';
 }
 
-bool IntVector::isAlloc() { return data_ != nullptr; }
-bool IntVector::isEmpty() { return size_ == 0; }
-std::size_t IntVector::size() { return size_; }
-std::size_t IntVector::capacity() { return capacity_; }
+[[nodiscard]] bool IntVector::isAlloc() const { return data_ != nullptr; }
+[[nodiscard]] bool IntVector::isEmpty() const { return size_ == 0; }
+[[nodiscard]] std::size_t IntVector::size() const { return size_; }
+[[nodiscard]] std::size_t IntVector::capacity() const { return capacity_; }
