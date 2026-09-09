@@ -42,6 +42,34 @@ IntVector &IntVector::operator=(IntVector &other) {
   return *this;
 }
 
+IntVector::IntVector(IntVector &&other) {
+  data_ = other.data_;
+  size_ = other.size_;
+  capacity_ = other.capacity_;
+
+  other.data_ = nullptr;
+  size_ = 0;
+  capacity_ = 0;
+}
+
+IntVector &IntVector::operator=(IntVector &&other) {
+  if (this == &other)
+    return *this;
+
+  if (isAlloc())
+    delete[] data_;
+
+  data_ = other.data_;
+  size_ = other.size_;
+  capacity_ = other.capacity_;
+
+  other.data_ = nullptr;
+  other.size_ = 0;
+  other.capacity_ = 0;
+
+  return *this;
+}
+
 IntVector::~IntVector() { delete[] data_; }
 
 void IntVector::reserve(std::size_t amount) {

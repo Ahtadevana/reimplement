@@ -9,6 +9,9 @@ int main() {
   v.reserve(4);
   v.pushBack(10);
 
+  v = std::move(v);
+  z = std::move(v);
+
   z.log();
 
   return 0;
