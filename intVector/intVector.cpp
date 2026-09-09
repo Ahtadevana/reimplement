@@ -17,7 +17,7 @@ IntVector::IntVector(std::size_t count, int element)
   }
 }
 
-IntVector::IntVector(IntVector &other)
+IntVector::IntVector(const IntVector &other)
     : size_(other.size_), capacity_(other.capacity_) {
   data_ = new int[other.capacity_];
 
@@ -26,7 +26,7 @@ IntVector::IntVector(IntVector &other)
   }
 }
 
-IntVector &IntVector::operator=(IntVector &other) {
+IntVector &IntVector::operator=(const IntVector &other) {
   if (this == &other)
     return *this;
 
