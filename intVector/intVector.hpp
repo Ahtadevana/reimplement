@@ -6,8 +6,8 @@ public:
   IntVector(std::size_t count);
   IntVector(std::size_t count, int element);
 
-  IntVector(IntVector &other);
-  IntVector &operator=(IntVector &other);
+  IntVector(const IntVector &other);
+  IntVector &operator=(const IntVector &other);
 
   IntVector(IntVector &&other);
   IntVector &operator=(IntVector &&other);
